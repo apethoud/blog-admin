@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 import LogoutButton from './logout-button'
+import Posts from './posts/page'
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
@@ -31,6 +32,9 @@ export default async function Index() {
           )}
         </span>
       </div>
+      {user && (
+        <Posts />
+      )}
     </div>
   )
 }
