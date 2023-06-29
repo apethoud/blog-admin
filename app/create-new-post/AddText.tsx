@@ -26,10 +26,12 @@ export default function AddText() {
           <div className="flex flex-col">
             <label htmlFor="text">Post Text</label>
             <Field 
+              as="textarea"
+              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600"
               id="text" 
               name="text" 
               placeholder="Insert blog post text here"
-              type="textarea"
+              type="text"
             />
 
             <button type="submit">Next</button>

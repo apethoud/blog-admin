@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import LogoutButton from './logout-button'
 import Posts from './posts/page'
+import PostCard from './posts/PostCard'
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
@@ -13,28 +14,14 @@ export default async function Index() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="flex-1 flex flex-col max-w-3xl mt-24">
-      <h1 className="text-2xl mb-2 flex justify-between">
-        <span className="sr-only">Blog Admin Portal</span>
-      </h1>
-
-      <div className="flex border-b py-3 text-sm text-neutral-100">
-        <span className="ml-auto">
-          {user ? (
-            <span className="flex gap-4">
-              Hey, {user.email}! <span className="border-r"></span>{' '}
-              <LogoutButton />
-            </span>
-          ) : (
-            <Link href="/login" className="text-neutral-100 hover:underline">
-              Login
-            </Link>
-          )}
-        </span>
-      </div>
-      {user && (
+    <>
+      {user ? (
         <Posts />
+      ) : (
+        <PostCard>
+          Login to view and edit posts
+        </PostCard>
       )}
-    </div>
+    </>
   )
 }
