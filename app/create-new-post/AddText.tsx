@@ -1,5 +1,6 @@
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import PageHeader from "../PageHeader";
+import PageHeader from "../_UI-components/PageHeader";
+import Button from "../_UI-components/Button";
 
 interface Values {
   text: string;
@@ -17,6 +18,7 @@ export default function AddText() {
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
+          console.log("values: ", values);
           setTimeout(() => {
             setSubmitting(false);
           }, 500);
@@ -34,7 +36,8 @@ export default function AddText() {
               type="text"
             />
 
-            <button type="submit">Next</button>
+            <Button type="submit" label="Next" primary />
+            <Button type="button" label="Cancel" />
           </div>
         </Form>
       </Formik>
