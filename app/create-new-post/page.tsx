@@ -3,6 +3,7 @@
 import { useState } from "react"
 import AddText from "./AddText"
 import { Post } from "./interfaces"
+import AddImages from "./AddImages"
 
 type InProgressPost = Partial<Post>
 
@@ -20,7 +21,9 @@ export default function CreateNewPost() {
         />
       )}
       {step === 2 && (
-        <div>Page 2</div>
+        <AddImages 
+          post={newPost}
+        />
       )}
     </>
   )
