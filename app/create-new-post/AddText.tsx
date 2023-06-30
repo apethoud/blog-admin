@@ -6,19 +6,25 @@ interface Values {
   text: string;
 }
 
-export default function AddText() {
+export default function AddText({ setNewPost, setStep, step }) {
   return (
     <>
-      <PageHeader text="Add some text to your post" />
+      <PageHeader text="Add a title and some text to your post" />
       <Formik
         initialValues={{
-          text: ''
+          postTitle: '',
+          postText: ''
         }}
         onSubmit={(
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
           console.log("values: ", values);
+          setNewPost({
+            title: values.postTitle,
+            text: values.postText
+          })
+          setStep(step + 1)
           setTimeout(() => {
             setSubmitting(false);
           }, 500);
@@ -26,13 +32,23 @@ export default function AddText() {
       >
         <Form>
           <div className="flex flex-col">
-            <label htmlFor="text">Post Text</label>
+            <label htmlFor="postTitle">Post Title</label>
+            <Field 
+              as="input"
+              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600"
+              id="postTitle" 
+              name="postTitle" 
+              placeholder="Post title"
+              type="text"
+            />
+
+            <label htmlFor="postText">Post Text</label>
             <Field 
               as="textarea"
               className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600"
-              id="text" 
-              name="text" 
-              placeholder="Insert blog post text here"
+              id="postText" 
+              name="postText" 
+              placeholder="Post text"
               type="text"
             />
 

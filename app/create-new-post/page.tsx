@@ -1,14 +1,22 @@
 'use client'
 
 import { useState } from "react"
-import AddText from "./AddText";
+import AddText from "./AddText"
+import { Post } from "./interfaces"
+
+type InProgressPost = Partial<Post>
 
 export default function CreateNewPost() {
-  const [ step, setStep ] = useState(1);
+  const [ newPost, setNewPost ] = useState<InProgressPost>({})
+  const [ step, setStep ] = useState(1)
   return (
     <>
       {step === 1 && (
-        <AddText />
+        <AddText 
+          setNewPost={setNewPost}
+          setStep={setStep}
+          step={step}
+        />
       )}
       {step === 2 && (
         <div>Page 2</div>
