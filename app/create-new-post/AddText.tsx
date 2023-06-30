@@ -1,6 +1,7 @@
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import PageHeader from "../_UI-components/PageHeader";
 import Button from "../_UI-components/Button";
+import { convertTextBodyToParagraphs, convertTitleToSlug } from "../utils";
 
 interface Values {
   text: string;
@@ -22,7 +23,8 @@ export default function AddText({ setNewPost, setStep, step }) {
           console.log("values: ", values);
           setNewPost({
             title: values.postTitle,
-            text: values.postText
+            slug: convertTitleToSlug(values.postTitle),
+            paragraphs: convertTextBodyToParagraphs(values.postText)
           })
           setStep(step + 1)
           setTimeout(() => {
