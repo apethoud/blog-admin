@@ -6,6 +6,8 @@ export interface Post {
   }
 }
 
+export type InProgressPost = Partial<Post>
+
 interface Paragraph {
   body: string;
   uiOrder: number;

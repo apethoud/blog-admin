@@ -2,10 +2,8 @@
 
 import { useState } from "react"
 import AddText from "./AddText"
-import { Post } from "./interfaces"
+import { InProgressPost } from "./interfaces"
 import AddImages from "./AddImages"
-
-type InProgressPost = Partial<Post>
 
 export default function CreateNewPost() {
   const [ newPost, setNewPost ] = useState<InProgressPost>({})
