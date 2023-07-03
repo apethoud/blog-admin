@@ -1,14 +1,16 @@
 export interface Post {
   title: string;
   slug: string;
-  paragraphs: {
-    [key: string]: Paragraph
-  }
 }
 
 export type InProgressPost = Partial<Post>
 
-interface Paragraph {
+export interface Paragraph {
   body: string;
-  uiOrder: number;
+  ui_order: number;
+  post_id: number;
 }
+
+export type Paragraphs = Array<Paragraph>
+
+export type InProgressParagraphs = Partial<Paragraphs>

@@ -7,7 +7,7 @@ interface Values {
   text: string;
 }
 
-export default function AddText({ setNewPost, setStep, step }) {
+export default function AddText({ setNewParagraphs, setNewPost, setStep, step }) {
   return (
     <>
       <PageHeader text="Add a title and some text to your post" />
@@ -20,12 +20,11 @@ export default function AddText({ setNewPost, setStep, step }) {
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
-          console.log("values: ", values);
           setNewPost({
             title: values.postTitle,
-            slug: convertTitleToSlug(values.postTitle),
-            paragraphs: convertTextBodyToParagraphs(values.postText)
+            slug: convertTitleToSlug(values.postTitle)
           })
+          setNewParagraphs(convertTextBodyToParagraphs(values.postText))
           setStep(step + 1)
           setTimeout(() => {
             setSubmitting(false);

@@ -1,28 +1,35 @@
-'use client'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
+import CreateNewPostForm from "./CreateNewPostForm";
+import { Paragraphs, Post } from "./interfaces";
+import { createParagraphRowsWithPostIdsAdded } from "../utils";
 
-import { useState } from "react"
-import AddText from "./AddText"
-import { InProgressPost } from "./interfaces"
-import AddImages from "./AddImages"
-
-export default function CreateNewPost() {
-  const [ newPost, setNewPost ] = useState<InProgressPost>({})
-  const [ step, setStep ] = useState(1)
-  console.log("newPost: ", newPost);
+export default async function CreateNewPost() {
+  
+  const submitPost = async (paragraphs: Paragraphs, post: Post) => {
+    'use server'
+    const supabase = createServerComponentClient({ cookies })
+    const { data: postData, error: postError } = await supabase
+      .from('posts')
+      .insert([
+        post
+      ])
+      .select()
+    if (postError) {
+      console.log("postError is: ", postError);
+    }
+    if (postData) {
+      const paragraphsWithPostIds = createParagraphRowsWithPostIdsAdded(paragraphs, postData[0].id)
+      const { data: paragraphsData, error: paragraphsError } = await supabase
+        .from('paragraphs')
+        .insert(paragraphsWithPostIds)
+        .select()
+        if (paragraphsError) {
+          console.log("paragraphsError is: ", paragraphsError);
+        }
+    }
+  }
   return (
-    <>
-      {step === 1 && (
-        <AddText 
-          setNewPost={setNewPost}
-          setStep={setStep}
-          step={step}
-        />
-      )}
-      {step === 2 && (
-        <AddImages 
-          post={newPost}
-        />
-      )}
-    </>
+    <CreateNewPostForm submitPost={submitPost} />
   )
 }
