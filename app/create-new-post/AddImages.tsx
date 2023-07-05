@@ -7,13 +7,23 @@ export default function AddImages({ paragraphs, post, submitPost }: { paragraphs
     e.preventDefault()
     submitPost(paragraphs, post)
   }
+
+  const AddImageButton = () => (
+    <div className="border border-dashed border-white mb-2 p-4">
+      + Add image
+    </div>
+  )
   return (
     <div className="flex flex-col">
       <form onSubmit={handleSubmit}>
-        <PageHeader text="Add Images (coming soon)" />
+        <PageHeader text="Add Images" />
         <div>{post.title}</div>
+        <AddImageButton />
         {paragraphs.map((paragraph: Paragraph, index: number) => (
-          <div key={index} className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{paragraph.body}</div>
+          <>
+            <div key={index} className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{paragraph.body}</div>
+            <AddImageButton />
+          </>
         ))}
         <Button primary type="submit" label="Post to Production" />
       </form>
