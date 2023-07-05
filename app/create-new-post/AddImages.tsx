@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react"
 import { Paragraph, Paragraphs, Post } from "./interfaces"
 import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"

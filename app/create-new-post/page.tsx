@@ -1,7 +1,7 @@
 'use client';
 
 import { InProgressParagraphs, Paragraphs, Post } from "./interfaces"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { createParagraphRowsWithPostIdsAdded } from "../utils";
 import AddText from "./AddText"
