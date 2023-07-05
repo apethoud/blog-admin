@@ -17,7 +17,7 @@ export default function AddImages({ paragraphs, post, submitPost }: { paragraphs
     <div className="flex flex-col">
       <form onSubmit={handleSubmit}>
         <PageHeader text="Add Images" />
-        <div>{post.title}</div>
+        <div className="text-md font-bold text-slate-900 dark:text-slate-100 my-2">{post.title}</div>
         <AddImageButton />
         {paragraphs.map((paragraph: Paragraph, index: number) => (
           <>
