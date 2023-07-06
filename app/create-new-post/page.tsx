@@ -1,9 +1,9 @@
 'use client';
 
-import { InProgressParagraphs, Paragraphs, Post } from "./interfaces"
+import { Post, PostElements } from "./interfaces"
 import { useState } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { createParagraphRowsWithPostIdsAdded } from "../utils";
+import { addUiOrderAndPostId, filterPostElementsByType } from "../utils";
 import AddText from "./AddText"
 import { InProgressPost } from "./interfaces"
 import AddImages from "./AddImages"
@@ -11,12 +11,12 @@ import { useRouter } from "next/navigation";
 
 export default function CreateNewPost() {
   const [ newPost, setNewPost ] = useState<InProgressPost>({})
-  const [ newParagraphs, setNewParagraphs ] = useState<InProgressParagraphs>([])
+  const [ newPostElements, setNewPostElements ] = useState<PostElements>([])
   const [ step, setStep ] = useState(1)
 
   const router = useRouter()
 
-  const submitPost = async (paragraphs: Paragraphs, post: Post) => {
+  const submitPost = async (newPostElements: PostElements, post: Post) => {
     const supabase = createClientComponentClient()
     const { data: postData, error: postError } = await supabase
       .from('posts')
@@ -28,16 +28,27 @@ export default function CreateNewPost() {
       console.log("postError is: ", postError);
     }
     if (postData) {
-      const paragraphsWithPostIds = createParagraphRowsWithPostIdsAdded(paragraphs, postData[0].id)
+      const completeParagraphsAndImages = addUiOrderAndPostId(newPostElements, postData[0].id)
+      const paragraphs = filterPostElementsByType(completeParagraphsAndImages, "paragraph")
       const { data: paragraphsData, error: paragraphsError } = await supabase
         .from('paragraphs')
-        .insert(paragraphsWithPostIds)
+        .insert(paragraphs)
         .select()
         if (paragraphsError) {
           console.log("paragraphsError is: ", paragraphsError);
         }
         if (paragraphsData) {
-          router.push("/")
+          const images = filterPostElementsByType(completeParagraphsAndImages, "image")
+          const { data: imagesData, error: imagesError } = await supabase
+            .from('images')
+            .insert(images)
+            .select()
+            if (imagesError) {
+              console.log("imagesError is: ", imagesError);
+            }
+            if (imagesData) {
+              router.push("/")
+            }
         }
     }
   }
@@ -46,7 +57,7 @@ export default function CreateNewPost() {
     <>
       {step === 1 && (
         <AddText 
-          setNewParagraphs={setNewParagraphs}
+          setNewPostElements={setNewPostElements}
           setNewPost={setNewPost}
           setStep={setStep}
           step={step}
@@ -54,7 +65,7 @@ export default function CreateNewPost() {
       )}
       {step === 2 && (
         <AddImages 
-          paragraphs={newParagraphs}
+          newPostElements={newPostElements}
           post={newPost}
           submitPost={submitPost}
         />

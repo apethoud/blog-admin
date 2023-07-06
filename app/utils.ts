@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Paragraphs } from "./create-new-post/interfaces";
+import { Paragraphs, PostElements } from "./create-new-post/interfaces";
 
 export const formatDate = (date, dateTokenString) => {
   return dayjs(date).format(dateTokenString || 'MMM D YYYY');
@@ -12,13 +12,19 @@ export const convertTitleToSlug = (title: string) => {
 export const convertTextBodyToParagraphs = (body: string) => {
   const arrayOfStrings = body.split(/\r\n|\r|\n/).filter(item => item !== "");
   return arrayOfStrings.map((str, index) => {
-    return { body: str, ui_order: index + 1 }
+    return { body: str, type: "paragraph" }
   })
 }
 
-export const createParagraphRowsWithPostIdsAdded = (paragraphs: Paragraphs, postId: number) => {
-  return paragraphs.map(paragraph => {
-    paragraph.post_id = postId;
-    return paragraph;
+export const addUiOrderAndPostId = (newPostElements: PostElements, postId: number) => {
+  return newPostElements.map((postElement, index) => {
+    postElement.post_id = postId;
+    postElement.ui_order = index;
+    return postElement;
   })
+}
+
+export const filterPostElementsByType = (postElements: PostElements, type: ("paragraph" | "image")) => {
+  const filtered = postElements.filter(postElement => postElement.type === type)
+  return filtered.map(({ type, ...remaining}) => remaining)
 }

@@ -7,7 +7,7 @@ interface Values {
   text: string;
 }
 
-export default function AddText({ setNewParagraphs, setNewPost, setStep, step }) {
+export default function AddText({ setNewPostElements, setNewPost, setStep, step }) {
   return (
     <>
       <PageHeader text="Add a title and some text to your post" />
@@ -24,7 +24,7 @@ export default function AddText({ setNewParagraphs, setNewPost, setStep, step })
             title: values.postTitle,
             slug: convertTitleToSlug(values.postTitle)
           })
-          setNewParagraphs(convertTextBodyToParagraphs(values.postText))
+          setNewPostElements(convertTextBodyToParagraphs(values.postText))
           setStep(step + 1)
           setTimeout(() => {
             setSubmitting(false);

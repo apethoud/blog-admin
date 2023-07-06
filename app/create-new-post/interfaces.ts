@@ -7,10 +7,23 @@ export type InProgressPost = Partial<Post>
 
 export interface Paragraph {
   body: string;
-  ui_order: number;
   post_id: number;
+  type?: "paragraph";
+  ui_order: number;
 }
 
-export type Paragraphs = Array<Paragraph>
+export type InProgressParagraph = Partial<Paragraph>
 
-export type InProgressParagraphs = Partial<Paragraphs>
+export interface Image {
+  post_id: number;
+  type?: "image";
+  ui_order: number;
+  url: string;
+}
+
+export type InProgressImage = Partial<Image>
+
+export type PostElement = (Paragraph | Image)
+
+export type PostElements = (Paragraph | Image)[]
+
