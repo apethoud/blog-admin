@@ -66,6 +66,7 @@ export default function CreateNewPost() {
       {step === 2 && (
         <AddImages 
           newPostElements={newPostElements}
+          setNewPostElements={setNewPostElements}
           post={newPost}
           submitPost={submitPost}
         />
