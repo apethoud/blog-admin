@@ -1,7 +1,7 @@
 import { Post, PostElement, PostElements } from "./interfaces"
 import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"
-import ImageUploader from "../ImageUploader"
+import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 
 export default function AddImages({ 
