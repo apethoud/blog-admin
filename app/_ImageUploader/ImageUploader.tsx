@@ -18,7 +18,8 @@ export default function ImageUploader({
     if (image) {
       const uploadImage = async () => {
         const supabase = createClientComponentClient()
-        const { data, error } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload('image_name', image)
+        const name = `image-${Math.floor(Math.random() * Math.pow(10, 10))}`
+        const { data, error } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
         if (error) {
           // Handle error
           console.log("ImageUploader error: ", error)
@@ -39,7 +40,6 @@ export default function ImageUploader({
       type="file"
       name="myImage"
       onChange={(event) => {
-        console.log(event.target.files[0]);
         setImage(event.target.files[0])
       }}
     />
