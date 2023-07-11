@@ -6,9 +6,11 @@ import { InProgressImageInfo } from "./types"
 const SUPABASE_STORAGE_BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET
 
 export default function ImageUploader({ 
+  insertionIndex,
   newPostElements, 
   setNewPostElements
 }: { 
+  insertionIndex: number,
   newPostElements: PostElements, 
   setNewPostElements: Dispatch<SetStateAction<PostElements>> 
 }) {
@@ -26,6 +28,10 @@ export default function ImageUploader({
         } else {
           // Handle success
           console.log("Image Uploader success! data: ", data)
+          // Insert a new image object into newPostElements with data.path as the url.
+          const tempElements = [...newPostElements]
+          tempElements.splice(insertionIndex, 0, { type: "image", url: data.path })
+          setNewPostElements(tempElements)
         }
       }
       uploadImage()
@@ -33,15 +39,16 @@ export default function ImageUploader({
   }, [image])
 
   return (
-    // <div className="border border-dashed border-white mb-2 p-4">
-    //   + Add image
-    // </div>
-    <input
-      type="file"
-      name="myImage"
-      onChange={(event) => {
-        setImage(event.target.files[0])
-      }}
-    />
+    <label className="border border-dashed border-white p-4 block">
+      + Add image
+      <input
+        style={{ display: "none" }}
+        type="file"
+        onChange={(e) => {
+          const copiedArray = [...e.target.files]
+          setImage(copiedArray[0])
+        }}
+      />
+    </label>
   )
 }

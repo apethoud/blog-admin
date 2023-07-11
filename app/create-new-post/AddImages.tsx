@@ -15,11 +15,13 @@ export default function AddImages({
   post: Post, 
   submitPost: (newPostElements: PostElements, post: Post) => void 
 }) {
+  console.log("*** newPostElements: ", newPostElements)
   return (
     <div className="flex flex-col">
       <PageHeader text="Add Images" />
       <div className="text-md font-bold text-slate-900 dark:text-slate-100 my-2">{post.title}</div>
       <ImageUploader
+        insertionIndex={0}
         newPostElements={newPostElements}
         setNewPostElements={setNewPostElements}
       />
@@ -32,6 +34,7 @@ export default function AddImages({
             <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.url}</div>
           )}
           <ImageUploader
+            insertionIndex={index + 1}
             newPostElements={newPostElements}
             setNewPostElements={setNewPostElements}
           />
