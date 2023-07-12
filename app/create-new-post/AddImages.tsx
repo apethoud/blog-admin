@@ -3,6 +3,7 @@ import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
+import Image from "next/image"
 
 export default function AddImages({ 
   newPostElements, 
@@ -31,7 +32,12 @@ export default function AddImages({
             <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.body}</div>
           )}
           {postElement.type === "image" && (
-            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.url}</div>
+            <Image 
+              src={postElement.url}
+              width={400}
+              height={300}
+              alt="pic"
+            />
           )}
           <ImageUploader
             insertionIndex={index + 1}

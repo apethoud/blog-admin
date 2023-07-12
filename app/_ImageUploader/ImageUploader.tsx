@@ -21,17 +21,31 @@ export default function ImageUploader({
       const uploadImage = async () => {
         const supabase = createClientComponentClient()
         const name = `image-${Math.floor(Math.random() * Math.pow(10, 10))}`
-        const { data, error } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
-        if (error) {
-          // Handle error
-          console.log("ImageUploader error: ", error)
+        const { data: uploadData, error: uploadError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
+        if (uploadError) {
+          // Handle uploadError
+          console.log("ImageUploader uploadError: ", uploadError)
         } else {
           // Handle success
-          console.log("Image Uploader success! data: ", data)
-          // Insert a new image object into newPostElements with data.path as the url.
-          const tempElements = [...newPostElements]
-          tempElements.splice(insertionIndex, 0, { type: "image", url: data.path })
-          setNewPostElements(tempElements)
+          console.log("Image Uploader success! uploadData: ", uploadData)
+          // Get a public url for the image
+          const { data: { publicUrl }, error: getPublicUrlError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name, {
+            transform: {
+              width: 400,
+              height: 300,
+            },
+          })
+          if (getPublicUrlError) {
+            // Handle getPublicUrlError
+            console.log("image download getPublicUrlError: ", getPublicUrlError)
+          } else {
+            // Handle success
+            console.log("image download success! publicUrl: ", publicUrl);
+            // Insert a new image object into newPostElements with data.path as the url.
+            const tempElements = [...newPostElements]
+            tempElements.splice(insertionIndex, 0, { type: "image", url: publicUrl })
+            setNewPostElements(tempElements)
+          }
         }
       }
       uploadImage()
