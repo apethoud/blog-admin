@@ -29,12 +29,7 @@ export default function ImageUploader({
           // Handle success
           console.log("Image Uploader success! uploadData: ", uploadData)
           // Get a public url for the image
-          const { data: { publicUrl }, error: getPublicUrlError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name, {
-            transform: {
-              width: 400,
-              height: 300,
-            },
-          })
+          const { data: { publicUrl }, error: getPublicUrlError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name)
           if (getPublicUrlError) {
             // Handle getPublicUrlError
             console.log("image download getPublicUrlError: ", getPublicUrlError)
