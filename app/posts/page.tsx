@@ -10,15 +10,7 @@ export default async function Posts() {
 
   const { data: posts } = await supabase
     .from('posts')
-    .select(`
-      *,
-      paragraphs (
-        post_id,
-        id,
-        ui_order,
-        body
-      )
-    `);
+    .select('id,created_at,title');
 
   return (
     <>
