@@ -28,15 +28,20 @@ export default async function RootLayout({
             <h1 className="text-2xl mb-2 flex justify-between">
               <span className="sr-only">Blog Admin Portal</span>
             </h1>
-            <div className="flex border-b border-slate-300 dark:border-slate-700 py-3 text-sm text-slate-900 dark:text-slate-100">
-              <span className="ml-auto">
+            <div className="flex justify-between border-b border-slate-300 dark:border-slate-700 py-3">
+              <span className="text-lg">
+                <span className="font-bold text-slate-900 dark:text-slate-100">Andrew Pethoud</span>
+                <span className="text-slate-900 dark:text-slate-100"> | </span>
+                <span className="font-bold uppercase text-violet-600 dark:text-violet-500">Admin</span>
+              </span>
+              <span className="text-md text-slate-900 dark:text-slate-100">
                 {user ? (
                   <span className="flex gap-4">
                     Hey, {user.email}! <span className="border-r border-slate-300 dark:border-slate-700"></span>{' '}
                     <LogoutButton />
                   </span>
                 ) : (
-                  <Link href="/login" className="text-neutral-100 hover:underline">
+                  <Link href="/login" className="hover:underline">
                     Login
                   </Link>
                 )}
