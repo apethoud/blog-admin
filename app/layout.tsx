@@ -23,16 +23,16 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen bg-slate-950 flex flex-col items-center">
+        <main className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col items-center">
           <div className="flex-1 flex flex-col max-w-3xl mt-24">
             <h1 className="text-2xl mb-2 flex justify-between">
               <span className="sr-only">Blog Admin Portal</span>
             </h1>
-            <div className="flex border-b py-3 text-sm text-neutral-100">
+            <div className="flex border-b border-slate-300 dark:border-slate-700 py-3 text-sm text-slate-900 dark:text-slate-100">
               <span className="ml-auto">
                 {user ? (
                   <span className="flex gap-4">
-                    Hey, {user.email}! <span className="border-r"></span>{' '}
+                    Hey, {user.email}! <span className="border-r border-slate-300 dark:border-slate-700"></span>{' '}
                     <LogoutButton />
                   </span>
                 ) : (
