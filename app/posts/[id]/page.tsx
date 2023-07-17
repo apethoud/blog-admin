@@ -1,5 +1,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import BlogTitle from "@/app/_UI-components/BlogTitle";
+import Text from "@/app/_UI-components/Text";
 import Image from "next/image";
 
 export default async function ViewPost({ params }) {
@@ -32,12 +34,12 @@ export default async function ViewPost({ params }) {
     <>
     {post && (
       <>
-        <div>{post.title}</div>
+        <BlogTitle>{post.title}</BlogTitle>
         <div>{post.created_at}</div>
         {postElements.map((element, index) => (
           <>
             {element.body && (
-              <div>{element.body}</div>
+              <Text>{element.body}</Text>
             )}
             {element.url && (
               <Image 
