@@ -1,9 +1,13 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import BlogTitle from "@/app/_UI-components/BlogTitle";
+import ReactMarkdown from "react-markdown";
 import Text from "@/app/_UI-components/Text";
 import Image from "next/image";
 import { formatDate } from "@/app/utils";
+import H1 from "@/app/_UI-components/H1";
+import H2 from "@/app/_UI-components/H2";
+import H3 from "@/app/_UI-components/H3";
 
 export default async function ViewPost({ params }) {
   const supabase = createClientComponentClient({ cookies })
@@ -31,6 +35,8 @@ export default async function ViewPost({ params }) {
   const postElements = [...post.paragraphs, ...post.images]
   postElements.sort((a, b) => (a.ui_order > b.ui_order) ? 1 : -1)
 
+  console.log("postElements is: ", postElements);
+
   return (
     <>
     {post && (
@@ -40,7 +46,7 @@ export default async function ViewPost({ params }) {
         {postElements.map((element, index) => (
           <>
             {element.body && (
-              <Text>{element.body}</Text>
+              <ReactMarkdown components={{ p: Text, h1: H1, h2: H2, h3: H3 }}>{element.body}</ReactMarkdown>
             )}
             {element.url && (
               <Image 
