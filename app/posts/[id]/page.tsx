@@ -42,7 +42,7 @@ export default async function ViewPost({ params }) {
         <BlogTitle>{post.title}</BlogTitle>
         <div className="italic text-slate-500 dark:text-slate-400">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (
-          <>
+          <div key={index}>
             {element.body && (
               <ReactMarkdown components={{ p: Text, h1: H1, h2: H2, h3: H3 }}>{element.body}</ReactMarkdown>
             )}
@@ -55,7 +55,7 @@ export default async function ViewPost({ params }) {
               alt="pic"
             />
             )}
-          </>
+          </div>
         ))}
       </>
     )}
