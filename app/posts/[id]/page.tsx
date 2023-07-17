@@ -35,8 +35,6 @@ export default async function ViewPost({ params }) {
   const postElements = [...post.paragraphs, ...post.images]
   postElements.sort((a, b) => (a.ui_order > b.ui_order) ? 1 : -1)
 
-  console.log("postElements is: ", postElements);
-
   return (
     <>
     {post && (
