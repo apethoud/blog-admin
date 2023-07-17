@@ -36,7 +36,7 @@ export default async function ViewPost({ params }) {
     {post && (
       <>
         <BlogTitle>{post.title}</BlogTitle>
-        <div className="italic text-slate-500">Posted {formatDate(post.created_at)}</div>
+        <div className="italic text-slate-500 dark:text-slate-400">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (
           <>
             {element.body && (
