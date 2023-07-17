@@ -2,6 +2,7 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import PageHeader from "../_UI-components/PageHeader";
 import Button from "../_UI-components/Button";
 import { convertTextBodyToParagraphs, convertTitleToSlug } from "../utils";
+import InputLabel from "../_UI-components/InputLabel";
 
 interface Values {
   text: string;
@@ -33,20 +34,20 @@ export default function AddText({ setNewPostElements, setNewPost, setStep, step 
       >
         <Form>
           <div className="flex flex-col">
-            <label htmlFor="postTitle">Post Title</label>
+            <InputLabel htmlFor="postTitle">Post Title</InputLabel>
             <Field 
               as="input"
-              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600"
+              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600 font-sans text-lg text-slate-900 dark:text-slate-100 antialiased"
               id="postTitle" 
               name="postTitle" 
               placeholder="Post title"
               type="text"
             />
 
-            <label htmlFor="postText">Post Text</label>
+            <InputLabel htmlFor="postText">Post Text</InputLabel>
             <Field 
               as="textarea"
-              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600"
+              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600 font-sans text-lg text-slate-900 dark:text-slate-100 antialiased"
               id="postText" 
               name="postText" 
               placeholder="Post text"
