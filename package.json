@@ -9,7 +9,7 @@
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
-    "dayjs": "^1.11.8",
+    "dayjs": "^1.11.9",
     "formik": "^2.4.2",
     "next": "latest",
     "postcss": "8.4.24",

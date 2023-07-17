@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import BlogTitle from "@/app/_UI-components/BlogTitle";
 import Text from "@/app/_UI-components/Text";
 import Image from "next/image";
+import { formatDate } from "@/app/utils";
 
 export default async function ViewPost({ params }) {
   const supabase = createClientComponentClient({ cookies })
@@ -35,7 +36,7 @@ export default async function ViewPost({ params }) {
     {post && (
       <>
         <BlogTitle>{post.title}</BlogTitle>
-        <div>{post.created_at}</div>
+        <div className="italic text-slate-500">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (
           <>
             {element.body && (
@@ -46,7 +47,7 @@ export default async function ViewPost({ params }) {
               src={element.url}
               width={800}
               height={600}
-              className="my-2"
+              className="my-6"
               alt="pic"
             />
             )}
