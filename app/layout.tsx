@@ -3,6 +3,8 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import LogoutButton from './logout-button'
+import Text from './_UI-components/Text'
+import { formatDate } from './utils'
 
 export const metadata = {
   title: 'Andrew Pethoud | Admin',
@@ -48,6 +50,9 @@ export default async function RootLayout({
               </span>
             </div>
             {children}
+            <div className="flex">
+              <Text>&copy; {formatDate(undefined, "YYYY")} Andrew Pethoud</Text>
+            </div>
           </div>
         </main>
       </body>
