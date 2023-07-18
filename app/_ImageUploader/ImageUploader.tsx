@@ -2,6 +2,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { PostElements } from "../create-new-post/interfaces"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { InProgressImageInfo } from "./types"
+import InputLabel from "../_UI-components/InputLabel"
 
 const SUPABASE_STORAGE_BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET
 
@@ -48,16 +49,18 @@ export default function ImageUploader({
   }, [image])
 
   return (
-    <label className="border border-dashed border-white p-4 block">
-      + Add image
-      <input
-        style={{ display: "none" }}
-        type="file"
-        onChange={(e) => {
-          const copiedArray = [...e.target.files]
-          setImage(copiedArray[0])
-        }}
-      />
-    </label>
+    <div className="border border-dashed border-white p-4 block">
+      <InputLabel>
+        + Add image
+        <input
+          style={{ display: "none" }}
+          type="file"
+          onChange={(e) => {
+            const copiedArray = [...e.target.files]
+            setImage(copiedArray[0])
+          }}
+        />
+      </InputLabel>
+    </div>
   )
 }
