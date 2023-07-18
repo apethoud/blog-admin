@@ -8,6 +8,7 @@ import { formatDate } from "@/app/utils";
 import H1 from "@/app/_UI-components/H1";
 import H2 from "@/app/_UI-components/H2";
 import H3 from "@/app/_UI-components/H3";
+import Link from 'next/link'
 
 export default async function ViewPost({ params }) {
   const supabase = createClientComponentClient({ cookies })
@@ -57,8 +58,24 @@ export default async function ViewPost({ params }) {
             )}
           </div>
         ))}
-        <div className="mt-8 border-t border-violet-600 dark:border-violet-500 pt-6 font-sans italic text-lg text-slate-900 dark:text-slate-100 antialiased my-4">
+        <div className="mt-8 border-t border-violet-600 dark:border-violet-500 pt-6 font-sans italic text-lg text-slate-900 dark:text-slate-100 antialiased">
           Hey, I'm Andrew Pethoud! I'm a full-stack software engineer <span className="not-italic">💻</span> who loves building joyful digital experiences for humans <span className="not-italic">👫</span>. I'm also passionate about walkable communities <span className="not-italic">🌳</span> and making cities safer for bikers and pedestrians <span className="not-italic">🚴</span>, especially when they're my own kids <span className="not-italic">🧒</span>.
+        </div>
+        <div className="flex">
+          <Text>Connect with me:</Text>
+          <Link 
+            href="https://twitter.com/AndrewPethoud" 
+            target="_blank"
+            className="font-sans font-bold text-lg text-violet-600 dark:text-violet-500 antialiased my-4 mx-2">
+              Twitter
+          </Link>
+          <Text>|</Text>
+          <Link 
+            href="https://www.linkedin.com/in/andrew-pethoud-abb81967/" 
+            target="_blank"
+            className="font-sans font-bold text-lg text-violet-600 dark:text-violet-500 antialiased my-4 mx-2">
+              LinkedIn
+          </Link>
         </div>
       </>
     )}
