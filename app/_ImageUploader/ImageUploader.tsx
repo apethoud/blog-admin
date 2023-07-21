@@ -1,5 +1,5 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { PostElements } from "../create-new-post/interfaces"
+import { InProgressPostElements } from "../create-new-post/interfaces"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { InProgressImageInfo } from "./types"
 import InputLabel from "../_UI-components/InputLabel"
@@ -12,32 +12,22 @@ export default function ImageUploader({
   setNewPostElements
 }: { 
   insertionIndex: number,
-  newPostElements: PostElements, 
-  setNewPostElements: Dispatch<SetStateAction<PostElements>> 
+  newPostElements: InProgressPostElements, 
+  setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>> 
 }) {
   const [ image, setImage ] = useState(null);
 
   useEffect(() => {
-    if (image) {
+    if (image && SUPABASE_STORAGE_BUCKET) {
       const uploadImage = async () => {
         const supabase = createClientComponentClient()
         const name = `image-${Math.floor(Math.random() * Math.pow(10, 10))}`
-        const { data: uploadData, error: uploadError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
+        const { data, error: uploadError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
         if (uploadError) {
-          // Handle uploadError
-          console.log("ImageUploader uploadError: ", uploadError)
+          console.log(uploadError)
         } else {
-          // Handle success
-          console.log("Image Uploader success! uploadData: ", uploadData)
-          // Get a public url for the image
-          const { data: { publicUrl }, error: getPublicUrlError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name)
-          if (getPublicUrlError) {
-            // Handle getPublicUrlError
-            console.log("image download getPublicUrlError: ", getPublicUrlError)
-          } else {
-            // Handle success
-            console.log("image download success! publicUrl: ", publicUrl);
-            // Insert a new image object into newPostElements with data.path as the url.
+          const { data: { publicUrl } } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name)
+          if (publicUrl) {
             const tempElements = [...newPostElements]
             tempElements.splice(insertionIndex, 0, { type: "image", url: publicUrl })
             setNewPostElements(tempElements)
@@ -46,7 +36,7 @@ export default function ImageUploader({
       }
       uploadImage()
     }
-  }, [image])
+  }, [image, SUPABASE_STORAGE_BUCKET])
 
   return (
     <div className="border border-dashed border-white p-4 block">

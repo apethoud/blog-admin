@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Paragraphs, PostElements } from "./create-new-post/interfaces";
+import { InProgressPostElements } from "./create-new-post/interfaces";
 
 export const formatDate = (date, dateTokenString) => {
   return dayjs(date).format(dateTokenString || 'MMM D YYYY');
@@ -16,7 +16,7 @@ export const convertTextBodyToParagraphs = (body: string) => {
   })
 }
 
-export const addUiOrderAndPostId = (newPostElements: PostElements, postId: number) => {
+export const addUiOrderAndPostId = (newPostElements: InProgressPostElements, postId: number) => {
   return newPostElements.map((postElement, index) => {
     postElement.post_id = postId;
     postElement.ui_order = index;
@@ -24,7 +24,7 @@ export const addUiOrderAndPostId = (newPostElements: PostElements, postId: numbe
   })
 }
 
-export const filterPostElementsByType = (postElements: PostElements, type: ("paragraph" | "image")) => {
+export const filterPostElementsByType = (postElements: InProgressPostElements, type: ("paragraph" | "image")) => {
   const filtered = postElements.filter(postElement => postElement.type === type)
   return filtered.map(({ type, ...remaining}) => remaining)
 }

@@ -25,5 +25,9 @@ export type InProgressImage = Partial<Image>
 
 export type PostElement = (Paragraph | Image)
 
+export type InProgressPostElement = (Partial<Paragraph> | Partial<Image>)
+
 export type PostElements = (Paragraph | Image)[]
+
+export type InProgressPostElements = (Partial<Paragraph> | Partial<Image>)[]
 
