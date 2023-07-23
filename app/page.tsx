@@ -1,10 +1,5 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import Image from 'next/image'
-import Link from 'next/link'
-import LogoutButton from './logout-button'
-import Posts from './posts/page'
-import PostCard from './posts/PostCard'
 import Text from './_UI-components/Text'
 
 export default async function Index() {
