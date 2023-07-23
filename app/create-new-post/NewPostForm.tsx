@@ -1,11 +1,10 @@
 'use client';
 
-import { Post, InProgressPostElements } from "./interfaces"
+import { InProgressPost, InProgressPostElements } from "./interfaces"
 import { useState } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { addUiOrderAndPostId, filterPostElementsByType } from "../utils";
 import AddText from "./AddText"
-import { InProgressPost } from "./interfaces"
 import AddImages from "./AddImages"
 import { useRouter } from "next/navigation";
 
@@ -16,7 +15,7 @@ export default function NewPostForm() {
 
   const router = useRouter()
 
-  const submitPost = async (newPostElements: InProgressPostElements, post: Post) => {
+  const submitPost = async (newPostElements: InProgressPostElements, post: InProgressPost) => {
     const supabase = createClientComponentClient()
     const { data: postData, error: postError } = await supabase
       .from('posts')

@@ -1,4 +1,4 @@
-import { Post, InProgressPostElement, InProgressPostElements } from "./interfaces"
+import { InProgressPost, InProgressPostElement, InProgressPostElements } from "./interfaces"
 import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
@@ -13,8 +13,8 @@ export default function AddImages({
 }: { 
   newPostElements: InProgressPostElements, 
   setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>>,
-  post: Post, 
-  submitPost: (newPostElements: InProgressPostElements, post: Post) => void 
+  post: InProgressPost, 
+  submitPost: (newPostElements: InProgressPostElements, post: InProgressPost) => void 
 }) {
   console.log("*** newPostElements: ", newPostElements)
   return (
