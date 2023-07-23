@@ -11,12 +11,12 @@ export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { session },
+  } = await supabase.auth.getSession()
 
   return (
     <>
-      {user ? (
+      {session ? (
         <Text>You're logged in!</Text>
       ) : (
         <Text>Login to view and edit posts</Text>
