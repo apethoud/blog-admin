@@ -5,6 +5,7 @@ import Link from 'next/link'
 import LogoutButton from './logout-button'
 import Posts from './posts/page'
 import PostCard from './posts/PostCard'
+import Text from './_UI-components/Text'
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
@@ -16,11 +17,9 @@ export default async function Index() {
   return (
     <>
       {user ? (
-        <Posts />
+        <Text>You're logged in!</Text>
       ) : (
-        <PostCard>
-          Login to view and edit posts
-        </PostCard>
+        <Text>Login to view and edit posts</Text>
       )}
     </>
   )
