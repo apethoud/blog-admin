@@ -40,10 +40,11 @@ export default function ImageUploader({
 
   return (
     <div className="border border-dashed border-white p-4 block">
-      <InputLabel>
+      <InputLabel htmlFor="imageUpload">
         + Add image
         <input
           style={{ display: "none" }}
+          name="imageUpload"
           type="file"
           onChange={(e) => {
             const copiedArray = [...e.target.files]
