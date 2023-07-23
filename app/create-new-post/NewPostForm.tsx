@@ -53,8 +53,6 @@ export default function NewPostForm() {
     }
   }
 
-  console.log("NewPostForm")
-
   return (
     <>
       {step === 1 && (
