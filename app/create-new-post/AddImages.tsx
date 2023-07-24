@@ -31,7 +31,7 @@ export default function AddImages({
           {postElement.type === "paragraph" && (
             <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.body}</div>
           )}
-          {postElement.type === "image" && (
+          {postElement.type === "image" && postElement.url && (
             <Image 
               src={postElement.url}
               width={800}
