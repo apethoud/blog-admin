@@ -44,7 +44,7 @@ export default function ImageUploader({
         + Add image
         <input
           style={{ display: "none" }}
-          name="imageUpload"
+          id="imageUpload"
           type="file"
           onChange={(e) => {
             if (e.target.files) {
