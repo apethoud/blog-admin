@@ -1,4 +1,11 @@
-export default function Button({ label, onClick, primary, type }) {
+type button = {
+  label: string;
+  onClick: () => void;
+  primary: boolean;
+  type: "button" | "submit";
+}
+
+export default function Button({ label, onClick, primary, type }: button) {
   return (
     <button 
       className={primary
