@@ -4,9 +4,18 @@ import PostCard from "./PostCard";
 import { formatDate } from "../utils";
 import NewPostButton from "./NewPostButton";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Posts() {
   const supabase = createServerComponentClient({ cookies });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) {
+    redirect('/unauthenticated')
+  }
 
   const { data: posts } = await supabase
     .from('posts')

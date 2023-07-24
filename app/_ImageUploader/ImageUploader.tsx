@@ -15,7 +15,7 @@ export default function ImageUploader({
   newPostElements: InProgressPostElements, 
   setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>> 
 }) {
-  const [ image, setImage ] = useState(null);
+  const [ image, setImage ] = useState<File | null>(null);
 
   useEffect(() => {
     if (image && SUPABASE_STORAGE_BUCKET) {
@@ -40,14 +40,17 @@ export default function ImageUploader({
 
   return (
     <div className="border border-dashed border-white p-4 block">
-      <InputLabel>
+      <InputLabel htmlFor="imageUpload">
         + Add image
         <input
           style={{ display: "none" }}
+          id="imageUpload"
           type="file"
           onChange={(e) => {
-            const copiedArray = [...e.target.files]
-            setImage(copiedArray[0])
+            if (e.target.files) {
+              const copiedArray = [...e.target.files]
+              setImage(copiedArray[0])
+            }
           }}
         />
       </InputLabel>

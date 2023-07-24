@@ -1,4 +1,4 @@
-import { Post, InProgressPostElement, InProgressPostElements } from "./interfaces"
+import { InProgressPost, InProgressPostElement, InProgressPostElements } from "./interfaces"
 import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
@@ -13,8 +13,8 @@ export default function AddImages({
 }: { 
   newPostElements: InProgressPostElements, 
   setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>>,
-  post: Post, 
-  submitPost: (newPostElements: InProgressPostElements, post: Post) => void 
+  post: InProgressPost, 
+  submitPost: (newPostElements: InProgressPostElements, post: InProgressPost) => void 
 }) {
   console.log("*** newPostElements: ", newPostElements)
   return (
@@ -31,7 +31,7 @@ export default function AddImages({
           {postElement.type === "paragraph" && (
             <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.body}</div>
           )}
-          {postElement.type === "image" && (
+          {postElement.type === "image" && postElement.url && (
             <Image 
               src={postElement.url}
               width={800}

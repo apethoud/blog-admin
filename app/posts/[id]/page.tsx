@@ -1,4 +1,4 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import BlogTitle from "@/app/_UI-components/BlogTitle";
 import ReactMarkdown from "react-markdown";
@@ -9,9 +9,18 @@ import H1 from "@/app/_UI-components/H1";
 import H2 from "@/app/_UI-components/H2";
 import H3 from "@/app/_UI-components/H3";
 import Link from 'next/link'
+import { redirect } from "next/navigation";
 
-export default async function ViewPost({ params }) {
-  const supabase = createClientComponentClient({ cookies })
+export default async function ViewPost({ params }: { params: { id: string }}) {
+  const supabase = createServerComponentClient({ cookies })
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) {
+    redirect('/unauthenticated')
+  }
   
   const { data } = await supabase
     .from('posts')
