@@ -3,12 +3,21 @@ import PageHeader from "../_UI-components/PageHeader";
 import Button from "../_UI-components/Button";
 import { convertTextBodyToParagraphs, convertTitleToSlug } from "../utils";
 import InputLabel from "../_UI-components/InputLabel";
+import { InProgressParagraph } from "./interfaces";
 
 interface Values {
-  text: string;
+  postTitle: string;
+  postText: string;
 }
 
-export default function AddText({ setNewPostElements, setNewPost, setStep, step }) {
+interface AddTextProps {
+  setNewPostElements: ([]) => void;
+  setNewPost: ({ title, slug }: { title: string, slug: string }) => void;
+  setStep: (arg0: number) => void;
+  step: number;
+}
+
+export default function AddText({ setNewPostElements, setNewPost, setStep, step }: AddTextProps) {
   return (
     <>
       <PageHeader text="Add a title and some text to your post" />
