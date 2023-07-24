@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { InProgressPostElements } from "./create-new-post/interfaces";
 
-export const formatDate = (date: Date, dateTokenString?: string) => {
+export const formatDate = (date: Date | undefined, dateTokenString?: string) => {
   return dayjs(date).format(dateTokenString || 'MMM D YYYY');
 }
 
