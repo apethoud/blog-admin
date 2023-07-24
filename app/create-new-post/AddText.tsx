@@ -3,7 +3,8 @@ import PageHeader from "../_UI-components/PageHeader";
 import Button from "../_UI-components/Button";
 import { convertTextBodyToParagraphs, convertTitleToSlug } from "../utils";
 import InputLabel from "../_UI-components/InputLabel";
-import { InProgressParagraph } from "./interfaces";
+import { InProgressParagraph, InProgressPostElements } from "./interfaces";
+import { Dispatch, SetStateAction } from "react";
 
 interface Values {
   postTitle: string;
@@ -11,7 +12,7 @@ interface Values {
 }
 
 interface AddTextProps {
-  setNewPostElements: ([]) => void;
+  setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>>;
   setNewPost: ({ title, slug }: { title: string, slug: string }) => void;
   setStep: (arg0: number) => void;
   step: number;
