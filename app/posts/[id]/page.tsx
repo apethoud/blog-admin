@@ -11,7 +11,7 @@ import H3 from "@/app/_UI-components/H3";
 import Link from 'next/link'
 import { redirect } from "next/navigation";
 
-export default async function ViewPost({ params }) {
+export default async function ViewPost({ params }: { params: { id: string }}) {
   const supabase = createServerComponentClient({ cookies })
 
   const {
