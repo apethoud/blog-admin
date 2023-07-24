@@ -1,7 +1,7 @@
 type button = {
   label: string;
-  onClick: () => void;
-  primary: boolean;
+  onClick?: () => void;
+  primary?: boolean;
   type: "button" | "submit";
 }
 
