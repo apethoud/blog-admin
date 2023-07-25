@@ -55,7 +55,7 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
     <>
     {post && (
       <>
-        <PostOptions post={post} />
+        <PostOptions postId={params.id} />
         <BlogTitle>{post.title}</BlogTitle>
         <div className="italic text-slate-500 dark:text-slate-400">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (
