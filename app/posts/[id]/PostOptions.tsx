@@ -7,7 +7,6 @@ export default function PostOptions({ postId }: { postId: string }) {
   const deletePost = async () => {
     const supabase = createClientComponentClient()
 
-
     const { data, error } = await supabase
       .from('posts')
       .update({ deleted: true })

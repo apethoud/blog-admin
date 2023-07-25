@@ -46,11 +46,6 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
   const postElements = [...post.paragraphs, ...post.images]
   postElements.sort((a, b) => (a.ui_order > b.ui_order) ? 1 : -1)
 
-  const deletePostFunctionAsDeclaration = async () => {
-    'use server'
-    deletePost(params.id)
-  }
-
   return (
     <>
     {post && (
