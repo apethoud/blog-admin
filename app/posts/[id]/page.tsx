@@ -12,6 +12,8 @@ import Link from 'next/link'
 import { redirect } from "next/navigation";
 import PostOptions from "./PostOptions";
 
+export const revalidate = 0;
+
 export default async function ViewPost({ params }: { params: { id: string }}) {
   const supabase = createServerComponentClient({ cookies })
 
@@ -50,7 +52,7 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
     <>
     {post && (
       <>
-        <PostOptions postId={params.id} />
+        <PostOptions postId={params.id} isDeleted={post.deleted} />
         <BlogTitle>{post.title}</BlogTitle>
         <div className="italic text-slate-500 dark:text-slate-400">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (

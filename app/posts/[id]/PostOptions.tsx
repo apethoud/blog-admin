@@ -3,18 +3,18 @@
 import Button from "@/app/_UI-components/Button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function PostOptions({ postId }: { postId: string }) {
-  const deletePost = async () => {
+export default function PostOptions({ postId, isDeleted }: { postId: string, isDeleted: boolean }) {
+  const togglePostDeletion = async () => {
     const supabase = createClientComponentClient()
 
     const { data, error } = await supabase
       .from('posts')
-      .update({ deleted: true })
+      .update({ deleted: !isDeleted })
       .eq('id', postId)
       .select()
 
     if (data) {
-      console.log("deletePost data is: ", data)
+      console.log("togglePostDeletion data is: ", data)
       console.log(`post with id: ${postId} deleted`)
     }
     if (error) {
@@ -24,7 +24,7 @@ export default function PostOptions({ postId }: { postId: string }) {
 
   return (
     <div className="border border-slate-500">
-      <Button label="Delete Post" type="button" onClick={deletePost} />
+      <Button label={isDeleted ? "Undelete Post" : "Delete Post"} type="button" onClick={togglePostDeletion} />
     </div>
   )
 }
