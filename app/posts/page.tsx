@@ -19,7 +19,7 @@ export default async function Posts() {
 
   const { data: posts } = await supabase
     .from('posts')
-    .select('id,created_at,title');
+    .select('id,created_at,title,deleted');
 
   return (
     <>
@@ -31,6 +31,9 @@ export default async function Posts() {
             <PostCard>
               <div>{formatDate(post.created_at, "MMM D 'YY")}</div>
               <div className="font-bold">{post.title}</div>
+              {post.deleted && (
+                <div className="italic">Deleted</div>
+              )}
             </PostCard>
           </Link>
         ))}

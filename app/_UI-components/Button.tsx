@@ -15,7 +15,7 @@ export default function Button({ label, onClick, primary, type }: button) {
           font-bold`
         : `bg-sky-100 dark:bg-slate-800 
           text-sky-900 dark:text-sky-100 
-          mt-4 p-2 
+          m-4 p-2 
           font-bold`
       }
       onClick={onClick}
