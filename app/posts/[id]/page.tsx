@@ -46,11 +46,16 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
   const postElements = [...post.paragraphs, ...post.images]
   postElements.sort((a, b) => (a.ui_order > b.ui_order) ? 1 : -1)
 
+  const deletePostFunctionAsDeclaration = async () => {
+    'use server'
+    deletePost(params.id)
+  }
+
   return (
     <>
     {post && (
       <>
-        <PostOptions />
+        <PostOptions post={post} />
         <BlogTitle>{post.title}</BlogTitle>
         <div className="italic text-slate-500 dark:text-slate-400">Posted {formatDate(post.created_at)}</div>
         {postElements.map((element, index) => (
