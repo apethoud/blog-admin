@@ -4,10 +4,7 @@ import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
-
-const divideTextByNewline = (text: string | undefined) => {
-  return text ? text.split('\n') : []
-}
+import Paragraph from "../_UI-components/Paragraph"
 
 export default function AddImages({ 
   newPostElements, 
@@ -31,11 +28,9 @@ export default function AddImages({
       />
       {newPostElements.map((postElement: InProgressPostElement, index: number) => (
         <div key={index}>
-          {postElement.type === "paragraph" && (
+          {postElement.type === "paragraph" && postElement.body && (
             <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">
-              {divideTextByNewline(postElement.body).map((el, index) => (
-                <div key={index}>{el}</div>
-              ))}
+              <Paragraph body={postElement.body} />
             </div>
           )}
           {postElement.type === "image" && postElement.url && (
