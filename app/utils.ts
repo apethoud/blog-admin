@@ -10,7 +10,7 @@ export const convertTitleToSlug = (title: string) => {
 }
 
 export const convertTextBodyToParagraphs = (body: string): { body: string; type: "paragraph" }[] => {
-  const arrayOfStrings = body.split(/\r\n|\r|\n/).filter(item => item !== "");
+  const arrayOfStrings = body.split(/\n\n/).filter(item => item !== "");
   return arrayOfStrings.map((str, index) => {
     return { body: str, type: "paragraph" }
   })

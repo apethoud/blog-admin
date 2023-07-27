@@ -4,6 +4,7 @@ import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
+import Paragraph from "../_UI-components/Paragraph"
 
 export default function AddImages({ 
   newPostElements, 
@@ -16,7 +17,6 @@ export default function AddImages({
   post: InProgressPost, 
   submitPost: (newPostElements: InProgressPostElements, post: InProgressPost) => void 
 }) {
-  console.log("*** newPostElements: ", newPostElements)
   return (
     <div className="flex flex-col">
       <PageHeader text="Add Images" />
@@ -28,8 +28,10 @@ export default function AddImages({
       />
       {newPostElements.map((postElement: InProgressPostElement, index: number) => (
         <div key={index}>
-          {postElement.type === "paragraph" && (
-            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.body}</div>
+          {postElement.type === "paragraph" && postElement.body && (
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">
+              <Paragraph body={postElement.body} />
+            </div>
           )}
           {postElement.type === "image" && postElement.url && (
             <Image 
