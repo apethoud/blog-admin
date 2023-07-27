@@ -3,6 +3,7 @@ import Text from "./Text"
 import { H1, H2, H3 } from "./Headers"
 import { Ol, Ul, Li } from "./Lists"
 import Blockquote from "./Blockquote"
+import A from "./Link"
 
 export default function Paragraph({ body }: { body: string }) {
   return (
@@ -14,7 +15,8 @@ export default function Paragraph({ body }: { body: string }) {
       ul: Ul, 
       ol: Ol, 
       li: Li, 
-      blockquote: Blockquote 
+      blockquote: Blockquote,
+      a: A
     }}>
       {body}
     </ReactMarkdown>
