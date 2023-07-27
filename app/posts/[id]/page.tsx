@@ -11,6 +11,7 @@ import H3 from "@/app/_UI-components/H3";
 import Link from 'next/link'
 import { redirect } from "next/navigation";
 import PostOptions from "./PostOptions";
+import Paragraph from "@/app/_UI-components/Paragraph";
 
 export const revalidate = 0;
 
@@ -58,7 +59,7 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
         {postElements.map((element, index) => (
           <div key={index}>
             {element.body && (
-              <ReactMarkdown components={{ p: Text, h1: H1, h2: H2, h3: H3 }}>{element.body}</ReactMarkdown>
+              <Paragraph body={element.body} />
             )}
             {element.url && (
               <Image 
