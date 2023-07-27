@@ -1,13 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import BlogTitle from "@/app/_UI-components/BlogTitle";
-import ReactMarkdown from "react-markdown";
 import Text from "@/app/_UI-components/Text";
 import Image from "next/image";
 import { formatDate } from "@/app/utils";
-import H1 from "@/app/_UI-components/H1";
-import H2 from "@/app/_UI-components/H2";
-import H3 from "@/app/_UI-components/H3";
 import Link from 'next/link'
 import { redirect } from "next/navigation";
 import PostOptions from "./PostOptions";
