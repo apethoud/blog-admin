@@ -4,6 +4,10 @@ import Text from "./Text";
 type BlockquoteChildrenType = ('\n' | ReactNode)[]
 
 export default function Blockquote({ children }: { children: BlockquoteChildrenType }) {
+  // This code is needed to extract the string from the Text element that's automatically passed
+  // to the <blockquote> element by the Markdown renderer so that we can modify the text's 
+  // styling directly
+  
   let childElement = null;
   let childString = null;
 
