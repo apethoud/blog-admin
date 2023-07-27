@@ -5,6 +5,10 @@ import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
 
+const divideTextByNewline = (text: string | undefined) => {
+  return text ? text.split('\n') : []
+}
+
 export default function AddImages({ 
   newPostElements, 
   setNewPostElements, 
@@ -16,7 +20,6 @@ export default function AddImages({
   post: InProgressPost, 
   submitPost: (newPostElements: InProgressPostElements, post: InProgressPost) => void 
 }) {
-  console.log("*** newPostElements: ", newPostElements)
   return (
     <div className="flex flex-col">
       <PageHeader text="Add Images" />
@@ -29,7 +32,11 @@ export default function AddImages({
       {newPostElements.map((postElement: InProgressPostElement, index: number) => (
         <div key={index}>
           {postElement.type === "paragraph" && (
-            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">{postElement.body}</div>
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 my-2 p-4">
+              {divideTextByNewline(postElement.body).map((el, index) => (
+                <div key={index}>{el}</div>
+              ))}
+            </div>
           )}
           {postElement.type === "image" && postElement.url && (
             <Image 
