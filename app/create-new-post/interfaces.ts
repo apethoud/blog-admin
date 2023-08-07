@@ -14,7 +14,10 @@ export interface Paragraph {
 
 export type InProgressParagraph = Partial<Paragraph>
 
+export type InProgressParagraphs = Partial<Paragraph>[]
+
 export interface Image {
+  alt_text: string;
   post_id: number;
   type?: "image";
   ui_order: number;
@@ -22,6 +25,8 @@ export interface Image {
 }
 
 export type InProgressImage = Partial<Image>
+
+export type InProgressImages = Partial<Image>[]
 
 export type PostElement = (Paragraph | Image)
 

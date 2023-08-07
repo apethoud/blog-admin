@@ -9,22 +9,20 @@ export const convertTitleToSlug = (title: string) => {
   return title.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "").replace(/[ ]/g, "-")
 }
 
-export const convertTextBodyToParagraphs = (body: string): { body: string; type: "paragraph" }[] => {
+export const convertTextBodyToParagraphs = (body: string): { body: string, ui_order: number }[] => {
   const arrayOfStrings = body.split(/\n\n/).filter(item => item !== "");
   return arrayOfStrings.map((str, index) => {
-    return { body: str, type: "paragraph" }
+    return { body: str, type: "paragraph", ui_order: index }
   })
 }
 
-export const addUiOrderAndPostId = (newPostElements: InProgressPostElements, postId: number) => {
-  return newPostElements.map((postElement, index) => {
+export const addPostId = (newPostElements: InProgressPostElements, postId: number) => {
+  return newPostElements.map((postElement) => {
     postElement.post_id = postId;
-    postElement.ui_order = index;
     return postElement;
   })
 }
 
-export const filterPostElementsByType = (postElements: InProgressPostElements, type: ("paragraph" | "image")) => {
-  const filtered = postElements.filter(postElement => postElement.type === type)
-  return filtered.map(({ type, ...remaining}) => remaining)
+export const removeElementType = (postElements: InProgressPostElements, type: ("paragraph" | "image")) => {
+  return postElements.map(({ type, ...remaining}) => remaining)
 }
