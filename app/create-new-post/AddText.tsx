@@ -3,7 +3,7 @@ import PageHeader from "../_UI-components/PageHeader";
 import Button from "../_UI-components/Button";
 import { convertTextBodyToParagraphs, convertTitleToSlug } from "../utils";
 import InputLabel from "../_UI-components/InputLabel";
-import { InProgressParagraph, InProgressPostElements } from "./interfaces";
+import { InProgressParagraphs } from "./interfaces";
 import { Dispatch, SetStateAction } from "react";
 
 interface Values {
@@ -12,13 +12,13 @@ interface Values {
 }
 
 interface AddTextProps {
-  setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>>;
+  setNewParagraphs: Dispatch<SetStateAction<InProgressParagraphs>>
   setNewPost: ({ title, slug }: { title: string, slug: string }) => void;
   setStep: (arg0: number) => void;
   step: number;
 }
 
-export default function AddText({ setNewPostElements, setNewPost, setStep, step }: AddTextProps) {
+export default function AddText({ setNewParagraphs, setNewPost, setStep, step }: AddTextProps) {
   return (
     <>
       <PageHeader text="Add a title and some text to your post" />
@@ -35,7 +35,7 @@ export default function AddText({ setNewPostElements, setNewPost, setStep, step 
             title: values.postTitle,
             slug: convertTitleToSlug(values.postTitle)
           })
-          setNewPostElements(convertTextBodyToParagraphs(values.postText))
+          setNewParagraphs(convertTextBodyToParagraphs(values.postText))
           setStep(step + 1)
           setTimeout(() => {
             setSubmitting(false);
@@ -64,8 +64,8 @@ export default function AddText({ setNewPostElements, setNewPost, setStep, step 
               type="text"
             />
 
-            <Button type="submit" label="Next" primary />
-            <Button type="button" label="Cancel" />
+            <Button type="submit" label="Next" primary marginTop />
+            <Button type="button" label="Cancel" marginTop />
           </div>
         </Form>
       </Formik>

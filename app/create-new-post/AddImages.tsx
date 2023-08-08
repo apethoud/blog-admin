@@ -1,30 +1,38 @@
-import { InProgressPost, InProgressPostElement, InProgressPostElements } from "./interfaces"
+import { InProgressImages, InProgressParagraphs, InProgressPost, InProgressPostElement, InProgressPostElements } from "./interfaces"
 import PageHeader from "../_UI-components/PageHeader"
 import Button from "../_UI-components/Button"
 import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
 import Paragraph from "../_UI-components/Paragraph"
+import AddImageAltText from "./AddImageAltText"
 
 export default function AddImages({ 
-  newPostElements, 
-  setNewPostElements, 
+  newParagraphs,
+  setNewParagraphs,
+  newImages,
+  setNewImages,
   post, 
   submitPost 
 }: { 
-  newPostElements: InProgressPostElements, 
-  setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>>,
+  newParagraphs: InProgressParagraphs,
+  setNewParagraphs: Dispatch<SetStateAction<InProgressParagraphs>>,
+  newImages: InProgressImages,
+  setNewImages: Dispatch<SetStateAction<InProgressImages>>,
   post: InProgressPost, 
-  submitPost: (newPostElements: InProgressPostElements, post: InProgressPost) => void 
+  submitPost: (newParagraphs: InProgressParagraphs, newImages: InProgressImages, post: InProgressPost) => void 
 }) {
+  const newPostElements = [...newParagraphs, ...newImages].sort((a, b) => (a.ui_order && b.ui_order) ? a.ui_order - b.ui_order : 0);
   return (
     <div className="flex flex-col">
       <PageHeader text="Add Images" />
       <div className="text-md font-bold text-slate-900 dark:text-slate-100 my-2">{post.title}</div>
       <ImageUploader
         insertionIndex={0}
-        newPostElements={newPostElements}
-        setNewPostElements={setNewPostElements}
+        newParagraphs={newParagraphs}
+        setNewParagraphs={setNewParagraphs}
+        newImages={newImages}
+        setNewImages={setNewImages}
       />
       {newPostElements.map((postElement: InProgressPostElement, index: number) => (
         <div key={index}>
@@ -34,22 +42,31 @@ export default function AddImages({
             </div>
           )}
           {postElement.type === "image" && postElement.url && (
-            <Image 
-              src={postElement.url}
-              width={800}
-              height={600}
-              className="my-2"
-              alt="pic"
-            />
+            <>
+              <Image 
+                src={postElement.url}
+                width={800}
+                height={600}
+                className="my-2"
+                alt="pic"
+              />
+              <AddImageAltText 
+                newImages={newImages}
+                setNewImages={setNewImages}
+                selectedImage={postElement}
+              />
+            </>
           )}
           <ImageUploader
             insertionIndex={index + 1}
-            newPostElements={newPostElements}
-            setNewPostElements={setNewPostElements}
+            newParagraphs={newParagraphs}
+            setNewParagraphs={setNewParagraphs}
+            newImages={newImages}
+            setNewImages={setNewImages}
           />
         </div>
       ))}
-      <Button primary type="button" onClick={() => submitPost(newPostElements, post)} label="Post to Production" />
+      <Button primary marginTop type="button" onClick={() => submitPost(newParagraphs, newImages, post)} label="Post to Production" />
     </div>
   )
 }

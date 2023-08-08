@@ -36,7 +36,8 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
         post_id,
         id,
         ui_order,
-        url
+        url,
+        alt_text
       )
     `)
     .eq('id', params.id)
@@ -63,7 +64,7 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
               width={800}
               height={600}
               className="my-6"
-              alt="pic"
+              alt={element.alt_text}
             />
             )}
           </div>

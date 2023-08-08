@@ -5,6 +5,7 @@ import { formatDate } from "../utils";
 import NewPostButton from "./NewPostButton";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { H3 } from "../_UI-components/Headers";
 
 export default async function Posts() {
   const supabase = createServerComponentClient({ cookies });
@@ -23,7 +24,7 @@ export default async function Posts() {
 
   return (
     <>
-      <div>Posts</div>
+      <H3>Posts</H3>
       <div className="flex flex-col py-3 text-sm text-neutral-100">
         <NewPostButton />
         {posts && posts?.map(post => (

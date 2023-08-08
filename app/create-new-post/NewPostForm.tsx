@@ -1,21 +1,22 @@
 'use client';
 
-import { InProgressPost, InProgressPostElements } from "./interfaces"
+import { InProgressPost, InProgressParagraphs, InProgressImages } from "./interfaces"
 import { useState } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { addUiOrderAndPostId, filterPostElementsByType } from "../utils";
+import { addPostId, removeElementType } from "../utils";
 import AddText from "./AddText"
 import AddImages from "./AddImages"
 import { useRouter } from "next/navigation";
 
 export default function NewPostForm() {
   const [ newPost, setNewPost ] = useState<InProgressPost>({})
-  const [ newPostElements, setNewPostElements ] = useState<InProgressPostElements>([])
+  const [ newParagraphs, setNewParagraphs ] = useState<InProgressParagraphs>([])
+  const [ newImages, setNewImages ] = useState<InProgressImages>([])
   const [ step, setStep ] = useState(1)
 
   const router = useRouter()
 
-  const submitPost = async (newPostElements: InProgressPostElements, post: InProgressPost) => {
+  const submitPost = async (newParagraphs: InProgressParagraphs, newImages: InProgressImages, post: InProgressPost) => {
     const supabase = createClientComponentClient()
     const { data: postData, error: postError } = await supabase
       .from('posts')
@@ -27,8 +28,8 @@ export default function NewPostForm() {
       console.log("postError is: ", postError);
     }
     if (postData) {
-      const completeParagraphsAndImages = addUiOrderAndPostId(newPostElements, postData[0].id)
-      const paragraphs = filterPostElementsByType(completeParagraphsAndImages, "paragraph")
+      const completeParagraphs = addPostId(newParagraphs, postData[0].id)
+      const paragraphs = removeElementType(completeParagraphs, "paragraph")
       const { data: paragraphsData, error: paragraphsError } = await supabase
         .from('paragraphs')
         .insert(paragraphs)
@@ -37,7 +38,8 @@ export default function NewPostForm() {
           console.log("paragraphsError is: ", paragraphsError);
         }
         if (paragraphsData) {
-          const images = filterPostElementsByType(completeParagraphsAndImages, "image")
+          const completeImages = addPostId(newImages, postData[0].id)
+          const images = removeElementType(completeImages, "image")
           const { data: imagesData, error: imagesError } = await supabase
             .from('images')
             .insert(images)
@@ -56,7 +58,7 @@ export default function NewPostForm() {
     <>
       {step === 1 && (
         <AddText 
-          setNewPostElements={setNewPostElements}
+          setNewParagraphs={setNewParagraphs}
           setNewPost={setNewPost}
           setStep={setStep}
           step={step}
@@ -64,8 +66,10 @@ export default function NewPostForm() {
       )}
       {step === 2 && (
         <AddImages 
-          newPostElements={newPostElements}
-          setNewPostElements={setNewPostElements}
+          newParagraphs={newParagraphs}
+          setNewParagraphs={setNewParagraphs}
+          newImages={newImages}
+          setNewImages={setNewImages}
           post={newPost}
           submitPost={submitPost}
         />
