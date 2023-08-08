@@ -64,11 +64,11 @@ export default function ImageUploader({
 
   return (
     <div className="border border-dashed border-white p-4 block">
-      <InputLabel htmlFor="imageUpload">
+      <InputLabel htmlFor={`imageUpload-${insertionIndex}`}>
         + Add image
         <input
           style={{ display: "none" }}
-          id="imageUpload"
+          id={`imageUpload-${insertionIndex}`}
           type="file"
           onChange={(e) => {
             if (e.target.files) {
