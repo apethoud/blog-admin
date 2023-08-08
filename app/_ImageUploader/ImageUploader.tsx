@@ -30,7 +30,13 @@ export default function ImageUploader({
         if (uploadError) {
           console.log(uploadError)
         } else {
-          const { data: { publicUrl } } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name)
+          const { data: { publicUrl } } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name, {
+            transform: {
+              width: 640,
+              height: 480,
+              resize: 'contain'
+            }
+          })
           if (publicUrl) {
             // Update the ui_order for all paragraphs and images to accomodate inserting the new image at a certain index
             // For every paragraph in newParagraphs with a ui_order of insertionIndex or higher, increment its ui_order by 1
