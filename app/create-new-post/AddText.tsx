@@ -64,8 +64,8 @@ export default function AddText({ setNewParagraphs, setNewPost, setStep, step }:
               type="text"
             />
 
-            <Button type="submit" label="Next" primary />
-            <Button type="button" label="Cancel" />
+            <Button type="submit" label="Next" primary marginTop />
+            <Button type="button" label="Cancel" marginTop />
           </div>
         </Form>
       </Formik>

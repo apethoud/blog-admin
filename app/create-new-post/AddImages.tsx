@@ -66,7 +66,7 @@ export default function AddImages({
           />
         </div>
       ))}
-      <Button primary type="button" onClick={() => submitPost(newParagraphs, newImages, post)} label="Post to Production" />
+      <Button primary marginTop type="button" onClick={() => submitPost(newParagraphs, newImages, post)} label="Post to Production" />
     </div>
   )
 }
