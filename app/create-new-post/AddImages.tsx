@@ -5,6 +5,7 @@ import ImageUploader from "../_ImageUploader/ImageUploader"
 import { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
 import Paragraph from "../_UI-components/Paragraph"
+import AddImageAltText from "./AddImageAltText"
 
 export default function AddImages({ 
   newParagraphs,
@@ -41,13 +42,20 @@ export default function AddImages({
             </div>
           )}
           {postElement.type === "image" && postElement.url && (
-            <Image 
-              src={postElement.url}
-              width={800}
-              height={600}
-              className="my-2"
-              alt="pic"
-            />
+            <>
+              <Image 
+                src={postElement.url}
+                width={800}
+                height={600}
+                className="my-2"
+                alt="pic"
+              />
+              <AddImageAltText 
+                newImages={newImages}
+                setNewImages={setNewImages}
+                selectedImage={postElement}
+              />
+            </>
           )}
           <ImageUploader
             insertionIndex={index + 1}

@@ -30,7 +30,7 @@ export default function ImageUploader({
         const name = `image-${Math.floor(Math.random() * Math.pow(10, 10))}`
         const { data, error: uploadError } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).upload(name, image)
         if (uploadError) {
-          console.log("UPLOAD ERROR: ", uploadError)
+          console.log(uploadError)
         } else {
           const { data: { publicUrl } } = await supabase.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(name)
           if (publicUrl) {
@@ -53,7 +53,7 @@ export default function ImageUploader({
               return i
             })
             // Add a new image to newImages with a ui_order of insertionIndex
-            tempImages.push({ alt_text: "test", type: "image", url: publicUrl, ui_order: insertionIndex })
+            tempImages.push({ alt_text: "", type: "image", url: publicUrl, ui_order: insertionIndex })
             setNewImages(tempImages)
           }
         }
