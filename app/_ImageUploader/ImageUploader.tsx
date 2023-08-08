@@ -14,8 +14,6 @@ export default function ImageUploader({
   setNewImages
 }: { 
   insertionIndex: number,
-  // newPostElements: InProgressPostElements, 
-  // setNewPostElements: Dispatch<SetStateAction<InProgressPostElements>> 
   newParagraphs: InProgressParagraphs,
   setNewParagraphs: Dispatch<SetStateAction<InProgressParagraphs>>,
   newImages: InProgressImages,
