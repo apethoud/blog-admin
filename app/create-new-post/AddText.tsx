@@ -57,7 +57,7 @@ export default function AddText({ setNewParagraphs, setNewPost, setStep, step }:
             <InputLabel htmlFor="postText">Post Text</InputLabel>
             <Field 
               as="textarea"
-              className="bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600 font-sans text-lg text-slate-900 dark:text-slate-100 antialiased"
+              className="h-96 bg-slate-100 dark:bg-slate-900 border border-solid border-slate-300 dark:border-slate-600 font-sans text-lg text-slate-900 dark:text-slate-100 antialiased"
               id="postText" 
               name="postText" 
               placeholder="Post text"
