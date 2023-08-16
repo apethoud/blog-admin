@@ -7,6 +7,10 @@ import Image from "next/image"
 import Paragraph from "../_UI-components/Paragraph"
 import AddImageAltText from "./AddImageAltText"
 
+const imageLoader = ({ src, width, quality } : { src: string, width: number, quality?: number }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function AddImages({ 
   newParagraphs,
   setNewParagraphs,
@@ -44,6 +48,7 @@ export default function AddImages({
           {postElement.type === "image" && postElement.url && (
             <>
               <Image 
+                loader={imageLoader}
                 src={postElement.url}
                 width={800}
                 height={600}
