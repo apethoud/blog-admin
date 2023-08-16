@@ -11,6 +11,10 @@ import Paragraph from "@/app/_UI-components/Paragraph";
 
 export const revalidate = 0;
 
+const imageLoader = ({ src, width, quality } : { src: string, width: number, quality?: number }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default async function ViewPost({ params }: { params: { id: string }}) {
   const supabase = createServerComponentClient({ cookies })
 
@@ -60,6 +64,7 @@ export default async function ViewPost({ params }: { params: { id: string }}) {
             )}
             {element.url && (
               <Image 
+              loader={imageLoader}
               src={element.url}
               width={800}
               height={600}
